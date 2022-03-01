@@ -47,11 +47,6 @@ or
   ```shell
     npm test
   ```
-  * How to run integration test
-  ### TODO: create npm script
-  ```shell
-    npm test:integration
-  ```
   * Fixture data located in the `test/resources` directory
   * Script to create a large file `scrpts/createBigFile.js`
 
