@@ -1,0 +1,29 @@
+{
+	"name": "moby",
+	"version": "1.0.0",
+	"description": "Creates a list of the 100 most common 3 word sequequences",
+	"main": "index.js",
+	"scripts": {
+		"big": "cat src/test/resources/bigFile.txt | node --max-old-space-size=8192 src/main/index.js 1> src/main/answer.txt",
+		"test": "jest",
+		"test:watch": "jest --watch --verbose false --detectOpenHandles"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jackjhall22/moby.git"
+	},
+	"author": "jack j hall",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jackjhall22/moby/issues"
+	},
+	"homepage": "https://github.com/jackjhall22/moby#readme",
+	"devDependencies": {
+		"jest": "^27.5.1",
+		"shelljs": "^0.8.5"
+	},
+	"dependencies": {
+		"event-stream": "^4.0.1",
+		"multistream": "^4.1.0"
+	}
+}
