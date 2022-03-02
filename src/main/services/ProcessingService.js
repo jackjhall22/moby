@@ -64,7 +64,7 @@ function createList(obj) {
 
 function processText(lines, moreLines, evenMoreLines) {
 	let result = {};
-	const words = messageTheLineData(lines);
+	const words = massageTheLineData(lines);
 	for (let i = 0; i < words.length; i++) {
 		if (words[i + 2] !== undefined) {
 			let key = words[i] + ' ' + words[i + 1] + ' ' + words[i + 2];
@@ -72,7 +72,7 @@ function processText(lines, moreLines, evenMoreLines) {
 		}
 	}
 	if (moreLines.length) {
-		const moreWords = messageTheLineData(moreLines);
+		const moreWords = massageTheLineData(moreLines);
 		for (let i = 0; i < moreWords.length; i++) {
 			if (moreWords[i + 2] !== undefined) {
 				let key = moreWords[i] + ' ' + moreWords[i + 1] + ' ' + moreWords[i + 2];
@@ -82,7 +82,7 @@ function processText(lines, moreLines, evenMoreLines) {
 	}
 	if (evenMoreLines.length) {
 		console.log(evenMoreLines.length);
-		const evenMoreWords = messageTheLineData(evenMoreLines);
+		const evenMoreWords = massageTheLineData(evenMoreLines);
 		for (let i = 0; i < evenMoreWords.length; i++) {
 			if (evenMoreWords[i + 2] !== undefined) {
 				let key = evenMoreWords[i] + ' ' + evenMoreWords[i + 1] + ' ' + evenMoreWords[i + 2];
@@ -93,7 +93,7 @@ function processText(lines, moreLines, evenMoreLines) {
 	return result;
 }
 
-function messageTheLineData(lines) {
+function massageTheLineData(lines) {
 	return lines
 		.filter((n) => n)
 		.map((line) => {
