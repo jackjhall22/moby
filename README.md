@@ -22,7 +22,7 @@ or
   ```shell
   ./index.js ../test/resources/mobyDick.txt
   ```
-4. Extra: you can write to the `answers.txt`
+4. Extra: you can write to the `answer.txt`
   ```shell
     cat ../test/resources/mobyDick.txt | ./index.js 1> answer.txt
   ```
