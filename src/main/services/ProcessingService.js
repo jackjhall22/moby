@@ -37,13 +37,6 @@ class ProcessingService {
 				})
 		);
 	}
-
-	print(processedText) {
-		const sortedList = createList(processedText);
-		const output = printText(sortedList);
-		console.log(output);
-		return output;
-	}
 }
 
 function printText(processedText) {
