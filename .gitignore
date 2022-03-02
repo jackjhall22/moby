@@ -1,5 +1,5 @@
 node_modules
 .vscode
 bigFile.txt
-out.txt
-line.txt
+stdin.txt
+multiFiles.txt

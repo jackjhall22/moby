@@ -15,6 +15,7 @@ Creates a list of the 100 most common three word sequences.
   ```
 3. Execute by navigating to the `src/main` directory
   ```shell
+    cd src/main 
     cat ../test/resources/mobyDick.txt | ./index.js
   ```
 or
