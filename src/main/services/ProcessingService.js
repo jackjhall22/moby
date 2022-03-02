@@ -7,20 +7,21 @@ class ProcessingService {
 	constructor() {}
 	process(readPath) {
 		let totalLines = 0;
-		let words = [];
-		let moreWords = [];
-		let evenMoreWords = [];
+		let lines = [];
+		let moreLines = [];
+		let evenMoreLines = [];
 		fs.createReadStream(readPath).pipe(es.split()).pipe(
 			es
 				.mapSync((line) => {
 					totalLines++;
 
+					// Pushing to overcome heap out of memory failure, not ideal
 					if (totalLines < 90000) {
-						words.push(line);
+						lines.push(line);
 					} else if (totalLines >= 90000 && totalLines < 180000) {
-						moreWords.push(line);
+						moreLines.push(line);
 					} else {
-						evenMoreWords.push(line);
+						evenMoreLines.push(line);
 					}
 				})
 				.on('error', (e) => {
@@ -29,8 +30,8 @@ class ProcessingService {
 				})
 				.on('end', () => {
 					console.log('Read Complete');
-					console.log(totalLines);
-					const processed = processText(words, moreWords, evenMoreWords);
+					console.log(`total lines: ${totalLines}`);
+					const processed = processText(lines, moreLines, evenMoreLines);
 					const sorted = createList(processed);
 					printText(sorted);
 					process.exit(1);
@@ -58,30 +59,16 @@ function createList(obj) {
 function processText(lines, moreLines, evenMoreLines) {
 	let result = {};
 	const words = massageTheLineData(lines);
-	for (let i = 0; i < words.length; i++) {
-		if (words[i + 2] !== undefined) {
-			let key = words[i] + ' ' + words[i + 1] + ' ' + words[i + 2];
-			result[key] = result[key] ? result[key] + 1 : 1;
-		}
-	}
+	result = buildCommonWordsCountMap(words, result);
+
 	if (moreLines.length) {
 		const moreWords = massageTheLineData(moreLines);
-		for (let i = 0; i < moreWords.length; i++) {
-			if (moreWords[i + 2] !== undefined) {
-				let key = moreWords[i] + ' ' + moreWords[i + 1] + ' ' + moreWords[i + 2];
-				result[key] = result[key] ? result[key] + 1 : 1;
-			}
-		}
+		result = buildCommonWordsCountMap(moreWords, result);
 	}
+
 	if (evenMoreLines.length) {
-		console.log(evenMoreLines.length);
 		const evenMoreWords = massageTheLineData(evenMoreLines);
-		for (let i = 0; i < evenMoreWords.length; i++) {
-			if (evenMoreWords[i + 2] !== undefined) {
-				let key = evenMoreWords[i] + ' ' + evenMoreWords[i + 1] + ' ' + evenMoreWords[i + 2];
-				result[key] = result[key] ? result[key] + 1 : 1;
-			}
-		}
+		result = buildCommonWordsCountMap(evenMoreWords, result);
 	}
 	return result;
 }
@@ -95,13 +82,25 @@ function massageTheLineData(lines) {
 				.toLowerCase()
 				.replace(/ '/g, "'") // possesive comma
 				.replace(/[.,\/#!$%@\^&\*;:{}=\_`~()?"-]/g, '') // punctuation
-				.replace(/[0-9]/g, '')
+				.replace(/[0-9]/g, '') // numbers
 				.replace(/ ' /g, '') // apostrophes
 				.replace(/' /g, '') // apostrophes
 				.split(' ');
 		})
 		.flat()
 		.filter((n) => n);
+}
+
+function buildCommonWordsCountMap(arrayOfWords, accumlator) {
+	const result = Object.assign({}, accumlator);
+	const words = massageTheLineData(arrayOfWords);
+	for (let i = 0; i < words.length; i++) {
+		if (words[i + 2] !== undefined) {
+			let key = words[i] + ' ' + words[i + 1] + ' ' + words[i + 2];
+			result[key] = result[key] ? result[key] + 1 : 1;
+		}
+	}
+	return result;
 }
 
 module.exports = {
