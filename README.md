@@ -38,6 +38,7 @@ or
 
   1. Generate a big file using `scripts/createBigFile.js`
   2. Execute by pasting in terminal `npm run big`
+  3. Open `answer.txt`
 
 ## Developing
  * How to run unit test with [`jest`](https://jestjs.io/docs/getting-started)

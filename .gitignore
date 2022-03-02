@@ -1,5 +1,6 @@
 node_modules
 .vscode
 bigFile.txt
-stdin.txt
-multiFiles.txt
+src/main/answer.txt
+src/main/answer.txt
+services/multiFiles.txt
