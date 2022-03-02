@@ -29,12 +29,8 @@ or
 
 ## Features
 
-* The program accepts as arguments a list of one or more file paths
-  ```shell
-    ./index.js file1.txt file2.txt
-* The program also accepts input on stdin (e.g. cat file1.txt | ./solution.rb).
-  ```shell
-    cat file1.txt | .index.js
+* The program accepts as arguments a list of one or more file paths ( e.g `./index.js file1.txt file2.txt` )
+* The program also accepts input on stdin. ( e.g `cat file1.txt | .index.js` )
 * The program outputs a list of the 100 most common three word sequences.
 * Handles unicode characters(eg. the ¨ in S¨sse or ß in Straße).
 * Sort of process files that are over 400MB (need to run with `node --max-old-space-size=8192 <FILE NAME>.js`)
