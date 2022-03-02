@@ -2,7 +2,7 @@ const fs = require('fs');
 const es = require('event-stream');
 
 class ProcessingService {
-	inputString = 'jack';
+	inputString = '';
 	result = {};
 	constructor() {}
 	process(readPath) {

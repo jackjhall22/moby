@@ -6,7 +6,7 @@ Creates a list of the 100 most common three word sequences.
 
 1. Clone repository
   ```shell
-    git clone 
+    git clone https://github.com/jackjhall22/moby.git
     cd moby
   ```
 2. Install with [`npm`](https://www.npmjs.com/)
