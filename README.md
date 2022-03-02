@@ -24,7 +24,7 @@ or
   ```
 4. Extra: you can write to the `answers.txt`
   ```shell
-    cat ../test/resources/mobyDick.txt | ./index.js 1> answers.txt
+    cat ../test/resources/mobyDick.txt | ./index.js 1> answer.txt
   ```
 
 ## Features
